@@ -1,0 +1,6 @@
+log.txt
+/out
+/node_modules
+/.vscode/symbols.json
+/reports
+/.vscode/settings.json

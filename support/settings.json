@@ -1,0 +1,18 @@
+{
+    "paths": {
+        "dirBuild": "./out",
+        "allSrcTs": "./src/**/*.ts",
+        "rootFeatures": "./features/*.feature",
+        "allFeatures": "./features/**/*.feature",
+        "reportFolder": "./reports",
+        "featuresPaths": "./features/"
+    },
+    "reportSettings": {
+        "title": "Title",
+        "reportPathJson": "./reports/report.json",
+        "reportPathHtml": "./reports/report.html",
+        "reportNameJson": "report.json",
+        "reportNameHtml": "report.html" 
+    }
+}
+
