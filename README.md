@@ -107,27 +107,27 @@ Also, let's add a method to check the header on the page.
 
 ```javascript
 // ../src/page/portalBasePage.ts
-import {WaitHelper, WebElement, ITimeStamp, IWait, BasePage} from '../core/core';
+import {WaitHelper, WebElement, BasePage, By} from '../core/core';
 
-export class PortalBasePage extends BasePage implements IWait {
-    private loadingIndicator: WebElement = new WebElement(this.dr).ByXPath("//div[contains(@class, 'blocking-overlay')]")
+export class PortalBasePage extends BasePage {
+    private loadingIndicator: By = By.xpath("//div[contains(@class, 'blocking-overlay')]")
 
     public async headerIsExists(pageHeader: string): Promise<boolean> {
         await this.waitPortal();
         let xPathForHeader = `//h1[contains(text(), '${pageHeader}')]`;
-        return await new WebElement(this.dr).ByXPath(xPathForHeader).isExists();
+        return await By.xpath(xPathForHeader).isExists();
     }
 
-    public async waitPortal(timeStamp?: ITimeStamp): Promise<void> {
-        await this.waitElement(this.loadingIndicator, false, timeStamp);
-    }
+    public async waitPortal(timeout?: number, interval?: number): Promise<void> {
+        let doesLoadingExist =  async (): Promise<boolean> => {
+            let elem = await this.driver.findElements(this.loadingIndicator);
+            return !elem.length;
+        };
+        let waitngForSpinner = await WaitHelper.waitUntil(doesLoadingExist, timeout || this.longTimeout, interval);
 
-    public async waitElement(elem: WebElement, expectedResult: boolean, timeStamp?: ITimeStamp): Promise<void> {
-        let condition =  WaitHelper.createWaitCondition(elem, elem.isExists);
-        let ts = timeStamp || { timeout: 5000, interval: 1000 };
-        let waitngForSpinner = await WaitHelper.spinWait(condition, expectedResult, ts);
-
-        if (!waitngForSpinner) { throw 'Loading indicator failed'; }
+        if (!waitngForSpinner) {
+            throw new Error('Loading indicator failed');
+        }
     }
 
 ```
@@ -137,14 +137,14 @@ Let's create pageObject LoginPage.ts, which contains one method for login.
 
 ```javascript
 // ../src/page/pages/loginPage.ts
-import {WebElement, Browser} from '../../core/core';
+import {By, Browser, WebElement} from '../../core/core';
 import {PortalBasePage} from '../portalBasePage';
 
 export class LoginPage extends PortalBasePage {
 
-    public loginInputBox: WebElement = new WebElement(this.dr).ByXPath("//*[@id='Username']");
-    public passwordInputBox: WebElement = new WebElement(this.dr).ByXPath("//*[@id='Password']");
-    public loginBtn: WebElement = new WebElement(this.dr).ByXPath("//*[text()='Continue']");
+    public loginInputBox: By = By.xpath("//*[@id='Username']");
+    public passwordInputBox: By = By.xpath("//*[@id='Password']");
+    public loginBtn: By = By.xpath("//*[text()='Continue']");
 
     public async login(login: string, pass: string): Promise<void> {
         await super.waitPortal();
