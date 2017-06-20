@@ -64,7 +64,7 @@ Just see the instructions below.
 ```gherkin
 # features/login.feature
 Feature: Login feature
- As a user of SmallMarket
+ As a user of Portal
  I want login on portal
 
 Scenario: Login on portal
