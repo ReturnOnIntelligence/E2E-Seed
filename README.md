@@ -29,6 +29,8 @@ This project contains basic project structure with the ability to:
 ```shell
     ext install cucumber 
     ext install tslint 
+    ext install vscode-codemetrics
+    ext install cucumber-mapper
 ```
 ### Install dependencies
 1. Install npm packages
@@ -40,10 +42,6 @@ This project contains basic project structure with the ability to:
 2. Update Webdriver-Manager
 ```shell
     webdriver-manager update
-```
-3. Start Webdriver-Manager before run tests:
-```shell
-    webdriver-manager start
 ```
 ## List of basic files in the project:
 *	world.ts – a file for creating unique global context for the scenario.
@@ -197,3 +195,21 @@ In step definitions we pass `this: IWorld` as a first parameter.
 See \src\support\world.ts to get more information.
 
 7. Run test in VS Code
+
+7.1 Start Webdriver-Manager before run tests:
+```shell
+    webdriver-manager start
+```
+Or run
+```shell
+    runWebDriver.sh
+```
+7.2 Start tests
+```shell
+    run.sh
+```
+Or you can use Debug Panel for run test and generate report
+* Run @test - it is mean run test which marked as @test
+* Generate Report 
+
+
