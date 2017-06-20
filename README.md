@@ -150,13 +150,13 @@ export class LoginPage extends PortalBasePage {
     public async login(login: string, pass: string): Promise<void> {
         await super.waitPortal();
         
-        let loginInput = await this.driver.findElements(this.loginInputBox);
+        let loginInput = await this.driver.findElement(this.loginInputBox);
         await loginInput.sendKeys(login);
         
-        let passwordInput = await this.driver.findElements(this.passwordInputBox);
+        let passwordInput = await this.driver.findElement(this.passwordInputBox);
         await passwordInput.sendKeys(pass);
         
-        let loginButton = await this.driver.findElements(this.loginBtn);
+        let loginButton = await this.driver.findElement(this.loginBtn);
         await loginButton.click();
     }
 }
