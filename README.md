@@ -107,7 +107,7 @@ Also, let's add a method to check the header on the page.
 
 ```javascript
 // ../src/page/portalBasePage.ts
-import {WaitHelper, WebElement, BasePage, By} from '../core/core';
+import {WaitHelper, WebElementEx, BasePage, By} from '../core/core';
 
 export class PortalBasePage extends BasePage {
     private loadingIndicator: By = By.xpath("//div[contains(@class, 'blocking-overlay')]")
@@ -115,7 +115,8 @@ export class PortalBasePage extends BasePage {
     public async headerIsExists(pageHeader: string): Promise<boolean> {
         await this.waitPortal();
         let xPathForHeader = `//h1[contains(text(), '${pageHeader}')]`;
-        return await By.xpath(xPathForHeader).isExists();
+        let elem = await this.driver.findElements(By.xpath(xPathForHeader));
+        return !elem.length;
     }
 
     public async waitPortal(timeout?: number, interval?: number): Promise<void> {
@@ -137,7 +138,7 @@ Let's create pageObject LoginPage.ts, which contains one method for login.
 
 ```javascript
 // ../src/page/pages/loginPage.ts
-import {By, Browser, WebElement} from '../../core/core';
+import {By, Browser, WebElementEx} from '../../core/core';
 import {PortalBasePage} from '../portalBasePage';
 
 export class LoginPage extends PortalBasePage {
@@ -148,9 +149,15 @@ export class LoginPage extends PortalBasePage {
 
     public async login(login: string, pass: string): Promise<void> {
         await super.waitPortal();
-        await this.loginInputBox.sendKeys(login);
-        await this.passwordInputBox.sendKeys(pass);
-        await this.loginBtn.click();
+        
+        let loginInput = await this.driver.findElements(this.loginInputBox);
+        await loginInput.sendKeys(login);
+        
+        let passwordInput = await this.driver.findElements(this.passwordInputBox);
+        await passwordInput.sendKeys(pass);
+        
+        let loginButton = await this.driver.findElements(this.loginBtn);
+        await loginButton.click();
     }
 }
 
