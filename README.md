@@ -3,7 +3,14 @@ This is a template of an autotest project.
 This project helps to quickly start autotest development for a Web project.
 It is based on open source technologies and has  flexibility of settings.
 
-![Image of Yaktocat](https://raw.githubusercontent.com/mikhail-tin/shara/master/tech.png)
+List of technologies:
+* TypeScript
+* NodeJS
+* Selenium
+* CucumberJS
+* Gulp
+
+![Image of Yaktocat](https://github.com/ReturnOnIntelligence/E2E-Seed/blob/master/assets/e2e-seed.png)
 
 This project contains basic project structure with the ability to:
 * debug tests,
