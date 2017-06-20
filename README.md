@@ -14,9 +14,9 @@ List of technologies:
 
 This project contains basic project structure with the ability to:
 * debug tests,
-* simple run,
-* parallel run,
-* writing tests in accordance with pageObject pattern.
+* perform a simple run,
+* perform a parallel run,
+* writing tests in accordance with the pageObject pattern.
 
 ## How To Use
 ### Prerequisities
@@ -208,8 +208,8 @@ Or run
 ```shell
     run.sh
 ```
-Or you can use Debug Panel for run test and generate report
-* Run @test - it is mean run test which marked as @test
+Or you can use Debug Panel for running the test and generating the report 
+* Run @test - run test which marked as @test
 * Generate Report 
 
 
