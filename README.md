@@ -16,7 +16,7 @@ This project contains basic project structure with the ability to:
 * debug tests,
 * perform a simple run,
 * perform a parallel run,
-* writing tests in accordance with the pageObject pattern.
+* write tests in accordance with the pageObject pattern.
 
 ## How To Use
 ### Prerequisities
@@ -216,7 +216,7 @@ Or run
     run.sh
 ```
 Or you can use Debug Panel for running the test and generating the report 
-* Run @test - run test which marked as @test
+* Run @test - run test marked as @test
 * Generate Report 
 
 
